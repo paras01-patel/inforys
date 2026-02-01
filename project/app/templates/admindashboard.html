@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+
+{% block title %}<title>AdminDashboard</title>{% endblock title %}
+
+{% block css %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --sidebar-bg: #0f172a;
+        --action-panel-bg: rgba(255, 255, 255, 0.9);
+        
+        --main-bg: #0f172a; 
+        --content-bg: #f8fafc;
+        --accent: #6366f1;
+        --accent-hover: #4f46e5;
+        --text-dark: #0f172a;
+        --text-muted: #64748b;
+        --danger: #ef4444;
+        --success: #10b981;
+        --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    body {
+        /* Dashboard Background: Deep Gradient Look */
+        background: radial-gradient(circle at top right, #1e293b, #0f172a);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        margin: 0;
+        color: var(--text-dark);
+        height: 100vh;
+    }
+
+    .dashboard-container {
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* SLIM SIDEBAR */
+    .nav-sidebar {
+        width: 72px;
+        background: var(--sidebar-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 0;
+        gap: 20px;
+        z-index: 100;
+        border-right: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-icon { 
+        color: #64748b; 
+        cursor: pointer; 
+        transition: var(--transition); 
+        text-decoration: none;
+        padding: 12px;
+        border-radius: 12px;
+    }
+    
+    .nav-icon:hover { color: white; background: rgba(255,255,255,0.1); transform: scale(1.1); }
+
+    /* QUICK ACTIONS PANEL */
+    .action-panel {
+        width: 260px;
+        background: var(--action-panel-bg);
+        backdrop-filter: blur(10px);
+        border-right: 1px solid #e2e8f0;
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .panel-title {
+        font-size: 11px;
+        font-weight: 800;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 20px;
+    }
+
+    .action-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #475569;
+        font-weight: 600;
+        transition: var(--transition);
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .action-item:hover { background: #f1f5f9; color: var(--accent); transform: translateX(5px); }
+    .action-item span { margin-right: 12px; font-size: 22px; }
+
+    /* MAIN CONTENT */
+    .main-content {
+        flex: 1;
+        padding: 40px;
+        overflow-y: auto;
+        background: var(--content-bg);
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        margin: 10px 0 10px 0;
+        animation: fadeIn 0.6s ease-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    }
+
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+
+    .info-card {
+        background: white;
+        padding: 24px;
+        border-radius: 24px;
+        box-shadow: var(--card-shadow);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition);
+    }
+    .info-card:hover { transform: translateY(-5px); }
+
+    .info-data h1 { font-size: 36px; margin: 8px 0 0 0; }
+    .info-data p { color: var(--text-muted); font-weight: 600; font-size: 14px; margin: 0; }
+
+    .info-icon-large { width: 60px; height: 60px; background: #f5f3ff; color: var(--accent); border-radius: 18px; display: flex; align-items: center; justify-content: center; }
+
+    /* Tables */
+    .content-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+    .content-table th { padding: 12px 20px; color: var(--text-muted); font-size: 11px; text-transform: uppercase; }
+    .content-table td { padding: 16px 20px; background: white; transition: var(--transition); }
+    .content-table tr td:first-child { border-radius: 12px 0 0 12px; }
+    .content-table tr td:last-child { border-radius: 0 12px 12px 0; }
+    
+    .btn-delete { color: var(--danger); cursor: pointer; border: none; background: none; transition: 0.2s; }
+    .btn-delete:hover { transform: scale(1.2); }
+
+    /* Forms */
+    .form-card { background: white; padding: 40px; border-radius: 24px; box-shadow: var(--card-shadow); max-width: 800px; }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 14px; }
+    .form-group input, .form-group select { width: 100%; padding: 14px 16px; border: 2px solid #f1f5f9; border-radius: 12px; outline: none; }
+    .form-group input:focus { border-color: var(--accent); }
+
+    .btn-submit { background: var(--accent); color: white; border: none; padding: 16px; border-radius: 14px; cursor: pointer; font-weight: 700; width: 100%; transition: var(--transition); }
+    .btn-submit:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    .logout-box { margin-top: auto; background: #fff1f2; color: var(--danger); }
+</style>
+{% endblock css %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="nav-sidebar">
+        <a href="?" class="nav-icon"><span class="material-icons-outlined" style="color: var(--accent); font-size: 32px;">grid_view</span></a>
+        <a href="#" class="nav-icon"><span class="material-icons-outlined">analytics</span></a>
+        <a href="#" class="nav-icon"><span class="material-icons-outlined">settings</span></a>
+    </div>
+
+    <div class="action-panel">
+        <h4 class="panel-title">Management</h4>
+        <a href="?action=add_employee" class="action-item"><span class="material-icons-outlined">person_add</span> Add Employee</a>
+        <a href="?action=all_employees" class="action-item"><span class="material-icons-outlined">groups</span> All Employees</a>
+        <a href="?action=add_department" class="action-item"><span class="material-icons-outlined">domain</span> Add Department</a>
+        <a href="?action=all_departments" class="action-item"><span class="material-icons-outlined">account_tree</span> All Departments</a>
+        <a href="?action=remove_employee" class="action-item" style="color: var(--danger);"><span class="material-icons-outlined">person_remove</span> Remove Employee</a>
+        <a href="{% url 'logout' %}" class="action-item" style="color: var(--danger);"><span class="material-icons-outlined">logout</span> Logout
+</a>
+   
+    </div>
+    <main class="main-content">
+        {% if request.GET.action %}
+            <div style="margin-bottom: 30px;">
+                <a href="?" style="text-decoration: none; color: var(--accent); font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 14px;">
+                    <span class="material-icons-outlined">arrow_back</span> Back to Dashboard
+                </a>
+            </div>
+        {% endif %}
+
+        {% if request.GET.action == "add_employee" %}
+            <div class="form-card">
+                <h2 style="font-weight: 800;">Register New Employee</h2>
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                        <div class="form-group"><label>First Name</label><input type="text" name="fname" placeholder="John" required></div>
+                        <div class="form-group"><label>Last Name</label><input type="text" name="lname" placeholder="Doe" required></div>
+                        <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="john@company.com" required></div>
+                        <div class="form-group"><label>Department</label>
+                            <select name="dept">
+                                <option>IT Department</option>
+                                <option>HR Department</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Save Employee</button>
+                </form>
+            </div>
+
+        {% elif request.GET.action == "remove_employee" or request.GET.action == "all_employees" %}
+            <div class="form-card" style="max-width: 100%;">
+                <h2 style="font-weight: 800;">{% if request.GET.action == "remove_employee" %}Remove Employee{% else %}All Employees{% endif %}</h2>
+                <table class="content-table">
+                    <thead><tr><th>Name</th><th>Email</th><th>Department</th><th>Action</th></tr></thead>
+                    <tbody>
+                        <tr><td>Rajesh Kumar</td><td>rajesh@hr.com</td><td>HR</td><td><button class="btn-delete"><span class="material-icons-outlined">delete</span></button></td></tr>
+                        <tr><td>Suresh Singh</td><td>suresh@it.com</td><td>IT</td><td><button class="btn-delete"><span class="material-icons-outlined">delete</span></button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        {% elif request.GET.action == "add_department" %}
+            <div class="form-card">
+                <h2 style="font-weight: 800;">Add New Department</h2>
+                <form action="" method="POST">
+
+                    <div class="form-group"><label>Department Name</label><input type="text" placeholder="e.g. Finance"></div>
+                    <div class="form-group"><label>Department Head</label><input type="text" placeholder="HOD Name"></div>
+                    <button type="submit" class="btn-submit">Create Department</button>
+                </form>
+            </div>
+
+        {% elif request.GET.action == "all_departments" %}
+            <div class="form-card" style="max-width: 100%;">
+                <h2 style="font-weight: 800;">All Departments</h2>
+                <table class="content-table">
+                    <thead><tr><th>Dept Name</th><th>HOD</th><th>Total Staff</th></tr></thead>
+                    <tbody>
+                        <tr><td>IT Department</td><td>Amit Sharma</td><td>24</td></tr>
+                        <tr><td>HR Department</td><td>Neha Verma</td><td>10</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        {% else %}
+            <div style="margin-bottom: 40px;">
+                <h1 style="color: var(--text-dark); margin: 0; font-weight: 800;">Admin Dashboard</h1>
+                <p style="color: var(--text-muted); margin: 8px 0 0 0;">Welcome back, <b>{{ data.email }}</b></p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-data"><p>Total Employees</p><h1>452</h1></div>
+                    <div class="info-icon-large"><span class="material-icons-outlined">badge</span></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-data"><p>Total Departments</p><h1>12</h1></div>
+                    <div class="info-icon-large" style="background: #fff7ed; color: #f59e0b;"><span class="material-icons-outlined">account_tree</span></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-data"><p>On Leave Today</p><h1>08</h1></div>
+                    <div class="info-icon-large" style="background: #fef2f2; color: #ef4444;"><span class="material-icons-outlined">event_busy</span></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-data"><p>Pending Tasks</p><h1>15</h1></div>
+                    <div class="info-icon-large" style="background: #ecfdf5; color: #10b981;"><span class="material-icons-outlined">pending_actions</span></div>
+                </div>
+            </div>
+        {% endif %}
+    </main>
+</div>
+{% endblock content %}

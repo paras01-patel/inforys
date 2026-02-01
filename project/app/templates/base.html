@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Infosys Navbar</title>
+<link rel="stylesheet" href="style.css">
+{% block css %}
+
+{% endblock css %}
+<style>
+/* ===== NAVBAR CSS ===== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar{
+    background:#9c9ab5;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 40px;
+}
+
+.logo{
+    color:black;
+    font-size:26px;
+    font-weight:500;
+    letter-spacing:1px;
+}
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    position:relative;
+}
+
+.menu a::after{
+    content:'';
+    position:absolute;
+    width:0;
+    height:2px;
+    background:white;
+    left:0;
+    bottom:-5px;
+    transition:0.3s;
+}
+
+.menu a:hover::after{
+    width:100%;
+}
+
+.icons{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.icon{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.icon span{
+    font-size:18px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+    .menu{
+        display:none;
+    }
+}
+.infosys-footer {
+    background: black;
+    color :white;
+    padding: 60px 80px 30px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 40px;
+}
+
+.footer-col h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color:white;
+}
+
+.footer-col a {
+    display: block;
+    text-decoration: none;
+    color:white;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer-col a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    font-size: 18px;
+}
+
+.social-icons a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.footer-bottom select {
+    padding: 8px 15px;
+    border: 1px solid #999;
+    outline: none;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<div class="navbar">
+
+    <div class="logo">Infosys</div>
+
+    <div class="menu">
+        <a href="#">Navigate your next</a>
+        <a href="#">Infosys Knowledge Institute</a>
+        <a href="#">Investors</a>
+        
+         <a href={% url "login" %}> login</a>
+    </div>
+
+    <div class="icons">
+        
+        <div class="icon"><span>🔍</span></div>
+        <div class="icon"><span>☰</span></div>
+    </div>
+
+</div>
+{% block content %}
+
+{% endblock content %}
+
+<footer class="infosys-footer">
+    <div class="footer-top">
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">Navigate your next</a>
+            <a href="#">About Us</a>
+            <a href="#">Careers</a>
+            <a href="#">ESG</a>
+            <a href="#">Investors</a>
+            <a href="#">Newsroom</a>
+            <a href="#">Alumni</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Subsidiaries</h4>
+            <a href="#">EdgeVerve Systems</a>
+            <a href="#">Infosys BPM</a>
+            <a href="#">Infosys Consulting</a>
+            <a href="#">Infosys Public Services</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Programs</h4>
+            <a href="#">Infosys Foundation</a>
+            <a href="#">Infosys Foundation USA</a>
+            <a href="#">Infosys Science Foundation</a>
+            <a href="#">Infosys Leadership Institute</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Support</h4>
+            <a href="#">Terms of Use</a>
+            <a href="#">Privacy Statement</a>
+            <a href="#">Cookie Policy</a>
+            <a href="#">Safe Harbour Provision</a>
+            <a href="#">Site Map</a>
+            <a href="#">Modern Slavery Statement</a>
+            <a href="#">Payment Guide for Suppliers</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Connect with us</h4>
+            <div class="social-icons">
+                <a href="#">X</a>
+                <a href="#">f</a>
+                <a href="#">in</a>
+                <a href="#">▶</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>Copyright © 2026 Infosys Limited</p>
+
+        <select>
+            <option>Select Country/region</option>
+            <option>India</option>
+            <option>USA</option>
+            <option>UK</option>
+        </select>
+    </div>
+</footer>
+
+
+</body>
+</html>
