@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from app.models import employee
 # from models import Department 
 
 # Create your views here.
@@ -45,6 +46,35 @@ def logout(req):
     else:
         return redirect('login')
     
+    
+    
+    
 def Department(req):
     return redirect(req,'landing.html')
     
+      
+def add_employee(req):
+    return render(req,'admindashboard.html',{'add_employee':True})
+
+def add(req):
+    if req.method=="POST":
+        fname=req.POST.get('fname')
+        lname=req.POST.get('lname')
+        email=req.POST.get('email')
+        Department=req.POST.get('dept')
+        user=employee.objects.filter(email=email)
+        if user:
+            return render(req,'admindashboard.html',{'add_employee':True})
+        else:
+            employee.objects.create(fname=fname,lname=lname,email=email,dept=Department)
+            return render(req,'admindashboard.html',{'add_employee':True})
+        
+def all_employee(req):
+    user =employee.objects.all()
+    return render(req,'admindashboard.html',{'data':user,'all_employee':True})
+
+def all_query(req):
+    return render(req,'all_query.html')
+
+def reply(req):
+    return render(req,"reply.html")

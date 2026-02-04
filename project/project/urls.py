@@ -24,5 +24,12 @@ urlpatterns = [
     path('login/',views.login,name='login'),
     path('admindashboard',views.admindashboard,name='admindashboard'),
     path('logout',views.logout,name='logout'),
-    path('Department',views.Department,name='Department')
+    path('Department',views.Department,name='Department'),
+    path('add_employee/',views.add_employee,name='add_employee'),
+    path('add',views.add,name='add'),
+    path('all_employee/',views.all_employee,name='all_employee'),
+    path('all_query/',views.all_query,name='all_query'),
+    path('reply/',views.reply,name='reply')
+    
+    
 ]

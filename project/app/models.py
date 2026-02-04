@@ -1,8 +1,10 @@
 from django.db import models
 
-class Department(models.Model):
-    d_name = models.CharField(max_length=50)
-    h_head = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.d_name
+class employee(models.Model):
+    fname = models.CharField(max_length=50)
+    lname = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    dept= models.CharField(max_length=50)
+ 
+ 
+ 

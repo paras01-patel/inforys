@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}all_query{% endblock title %}
+{% block content %}
+
+
+{% block css %}
+<style>
+        
+.main-content,
+.content {
+    margin-left: 240px;   /* left navbar width */
+    padding: 30px;
+}
+
+/* TABLE */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.content-table thead tr {
+    background-color: #fff1f2;
+    color: black;
+    text-align: left;
+}
+
+.content-table th {
+    padding: 14px 16px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* BODY */
+.content-table td {
+    padding: 13px 16px;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* ZEBRA STRIPES */
+.content-table tbody tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+/* HOVER EFFECT */
+.content-table tbody tr:hover {
+    background-color: #eef2ff;
+    transition: 0.2s ease-in-out;
+}
+
+/* STATUS COLUMN */
+.content-table td:nth-child(6) {
+    font-weight: 600;
+    color: #2563eb;
+}
+
+/* ADMIN REPLY */
+.content-table td:nth-child(7) {
+    font-style: italic;
+    color: #475569;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .content-table {
+        font-size: 13px;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 10px;
+    }
+}
+</style>
+{% endblock css %}
+
+
+
+
+<table class="content-table">
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>employee Name</th>
+                <th>department</th>
+                <th>query</th>
+                <th>email</th>
+                <th>status</th>
+                <th>admin reply</th>
+                
+
+
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+            {% for i in  show_query %}
+                   <td>{{forloop.counter}}</td>
+                    <td>{{i.Name}}</td>
+                    <td>{{i.department}}</td>
+                    <td>{{i.Query}}</td>
+                    <td>{{i.Email}}</td>
+                    <td>{{i.status}}</td>
+                    <td>{{i.admin_rep}}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+{% endblock content %} 
