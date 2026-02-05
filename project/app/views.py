@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from app.models import employee
-# from models import Department 
+from app.models import add_dept 
 
 # Create your views here.
 
@@ -62,6 +62,7 @@ def add(req):
         lname=req.POST.get('lname')
         email=req.POST.get('email')
         Department=req.POST.get('dept')
+        
         user=employee.objects.filter(email=email)
         if user:
             return render(req,'admindashboard.html',{'add_employee':True})
@@ -72,6 +73,26 @@ def add(req):
 def all_employee(req):
     user =employee.objects.all()
     return render(req,'admindashboard.html',{'data':user,'all_employee':True})
+
+def add_department(req):
+        return render(req,'admindashboard.html',{'add_department':True})  
+
+
+def add_d(req):
+    if req.method == "POST":
+        d = req.POST.get('department')
+        h = req.POST.get('h_department')
+        add_dept.objects.create(department=d, h_department=h)
+        return render(req, 'admindashboard.html', {'add_department': True})
+
+    else:
+        return render(req, 'admindashboard.html')
+
+def all_department(req):
+    user=add_dept.objects.all()
+    return render(req,'admindashboard.html',{'all_department':user})
+
+
 
 def all_query(req):
     return render(req,'all_query.html')

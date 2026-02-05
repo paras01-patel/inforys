@@ -28,6 +28,9 @@ urlpatterns = [
     path('add_employee/',views.add_employee,name='add_employee'),
     path('add',views.add,name='add'),
     path('all_employee/',views.all_employee,name='all_employee'),
+    path('add_department/',views.add_department,name='add_department'),
+    path('add_d',views.add_d,name="add_d"),
+    path('all_department',views.all_department,name='all_department'),
     path('all_query/',views.all_query,name='all_query'),
     path('reply/',views.reply,name='reply')
     

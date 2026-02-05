@@ -157,6 +157,42 @@
     .btn-submit:hover { background: var(--accent-hover); transform: translateY(-2px); }
 
     .logout-box { margin-top: auto; background: #fff1f2; color: var(--danger); }
+
+    form {
+    width: 400px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    font-family: Arial, sans-serif;
+}
+
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 18px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+
+
 </style>
 {% endblock css %}
 
@@ -173,16 +209,16 @@
 
         <div class="action-panel">
             <h4 class="panel-title">Management</h4>
-            <a href={% url "add_employee" %} class="action-item">
+            <a href="{% url 'add_employee' %}" class="action-item">
                 <span class="material-icons-outlined">person_add</span> Add Employee
             </a>
-            <a href="{% url "all_employee" %}" class="action-item">
+            <a href="{% url 'all_employee' %}" class="action-item">
                 <span class="material-icons-outlined">groups</span> All Employees
             </a>
-            <a href="" class="action-item">
+            <a href="{% url 'add_department' %}" class="action-item">
                 <span class="material-icons-outlined">domain</span> Add Department
             </a>
-            <a href="" class="action-item">
+            <a href="{% url 'all_department' %}" class="action-item">
                 <span class="material-icons-outlined">account_tree</span> All Departments
             </a>
             <a href="{% url "all_query" %}" class="action-item">
@@ -238,6 +274,7 @@
                     <button type="submit" class="btn-submit">Save Employee</button>
                 </form>
             {% elif all_department %}
+
             <table>
                 <tr>
                     <td>s.no</td>
@@ -254,16 +291,17 @@
                 <tr>
                     {% endfor %}
             </table>
-            {% elif all_employees %}
-<div class="form-card" style="max-width: 100%;">
-    <h2>All Employees</h2>
-    {% if all_emp %}
+            {% elif all_employee %}
+        <div class="form-card" style="max-width: 100%;">
+        <h2>All Employees</h2>
+    
     
 
     <table class="content-table">
     
         <thead>
             <tr>
+                <th>S.no</th>
                 <th>FName</th>
                 <th>lName
                 <th>Email</th>
@@ -273,7 +311,7 @@
         <tbody>
          
             
-            {% for i in  all_emp %}
+            {% for i in  data %}
 
                 <tr>
                     <td>{{forloop.counter}}</td>
@@ -286,12 +324,73 @@
                 </tr>
         </tbody>
     </table>
-        {% else %}
-    <h1>   no  employees </h1>
-    {% endif %}
+        
 </div>
-            {% endif %}
-    <div class="form-card" style="max-width: 100%;">
+
+add deaprtmentstart fro here 
+
+{% elif add_department  %}
+
+
+<form action={% url "add_d" %} method="POST">
+    {% csrf_token %}
+    <label for=""> Department</label>
+    <input type="text" placeholder="enter a department" name="department">
+
+    <label for="">Head Department</label>
+    <input type="text" placeholder="enter a head depsrtment" name="h_department">
+
+
+    <button 
+    type="submit"
+    style="
+        padding:10px 22px;
+        margin-left:90px;
+        background-color:#2c3e50;
+        color:white;
+        border:none;
+        border-radius:4px;
+        font-size:15px;
+        cursor:pointer;
+    ">
+    Add Department
+</button>
+
+</form>
     
+
+        {% elif all_department %}
+        <div class="form-cardd" style="max-width: 100%;">
+        <h2>All Employees</h2>
+    
+    
+
+    <table class="content-tablle">
+    
+        <thead>
+            <tr>
+                <th>S.no</th>
+                <th>Department</th>
+                <th>Head Department</th>
+                
+        </thead>
+        <tbody>
+            
+            {% for i in  user %}
+
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.department}}</td>
+                    <td>{{i.h_department}}</td>
+            
+                
+            {% endfor%}
+                </tr>
+        </tbody>
+    </table>
+        
+</div>
+
+{% endif %}
   
 {% endblock content %}

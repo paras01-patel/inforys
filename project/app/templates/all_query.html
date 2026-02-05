@@ -98,9 +98,9 @@
             </tr>
         </thead>
         <tbody>
-             <tr>
+            <tr>
             {% for i in  show_query %}
-                   <td>{{forloop.counter}}</td>
+                    <td>{{forloop.counter}}</td>
                     <td>{{i.Name}}</td>
                     <td>{{i.department}}</td>
                     <td>{{i.Query}}</td>
@@ -109,6 +109,6 @@
                     <td>{{i.admin_rep}}</td>
             </tr>
         </tbody>
-        {% endfor %}
+            {% endfor %}
     </table>
 {% endblock content %} 
