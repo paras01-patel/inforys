@@ -9,3 +9,12 @@ class employee(models.Model):
 class add_dept(models.Model):
     department=models.CharField(max_length=50)
     h_department=models.CharField(max_length=50)
+    
+class querys(models.Model):
+    name=models.CharField(max_length=50)
+    email=models.CharField(max_length=50)
+    query=models.CharField(max_length=50)
+    department=models.CharField(max_length=50)
+    status=models.CharField(max_length=90,default='pending')
+    admin_reply=models.CharField(max_length=9,blank=True)
+    

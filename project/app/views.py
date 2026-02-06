@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from app.models import employee
-from app.models import add_dept 
+from app.models import add_dept,querys
 
 # Create your views here.
 
@@ -19,9 +19,17 @@ def login(req):
             req.session['admin_p'] = p
             req.session['admin_n'] = 'admin'
             return redirect('admindashboard')
-        else:
-            x={ 'g':"wrong passord or username"}
-            return render(req,'login.html',{'data':x})
+        else :
+            user=employee.objects.filter(email=e) 
+            if user:
+                udata=employee.objects.get(email=e)
+                if udata.email==e and udata.lname==p:
+                    return redirect('userpanel')
+                
+             
+    else:
+        x={ 'g':"wrong passord or username"}
+        return render(req,'login.html',{'data':x})
 
     return render(req, 'login.html')
 
@@ -49,11 +57,9 @@ def logout(req):
     
     
     
-def Department(req):
-    return redirect(req,'landing.html')
-    
       
 def add_employee(req):
+    
     return render(req,'admindashboard.html',{'add_employee':True})
 
 def add(req):
@@ -89,13 +95,38 @@ def add_d(req):
         return render(req, 'admindashboard.html')
 
 def all_department(req):
-    user=add_dept.objects.all()
-    return render(req,'admindashboard.html',{'all_department':user})
+    uuser=add_dept.objects.all()
+    return render(req,'admindashboard.html',{'all_department':uuser})
+
+# usrpanel
+
+def userpanel(req):
+    return render(req,'userpanel.html')
+
+def submit_q(req):
+    if req.method=="POST":
+        n=req.POST.get('name')
+        e=req.POST.get('email')
+        d=req.POST.get('department')
+        q=req.POST.get('query')
+        querys.objects.create(name=n,email=e,department=d,query=q)
+        return render(req,'userpanel.html',{'submit_q':True})
+    return render(req,'userpanel.html',{'submit_q':True})
+    
+    
+def show_q(req):
+    data1=querys.objects.all()
+    return render(req,'userpanel.html',{'show_q':data1})
+    
+
+
+def all_q(req):
+    dataa=querys.objects.all()
+    return render(req,'admindashboard.html',{'all_q':dataa})
 
 
 
-def all_query(req):
-    return render(req,'all_query.html')
+def pending(req):
+    return render(req,'userpanel.html',{'pending':True})
 
-def reply(req):
-    return render(req,"reply.html")
+

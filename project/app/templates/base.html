@@ -160,8 +160,11 @@
         <a href="#">Navigate your next</a>
         <a href="#">Infosys Knowledge Institute</a>
         <a href="#">Investors</a>
-        
-         <a href={% url "login" %}> login</a>
+        {% if user.email %}
+        <a href="{% url "login" %}"> login</a>
+        {% else %}
+        <a href="{% url "logout" %}"> logout</a>
+        {% endif%}
     </div>
 
     <div class="icons">

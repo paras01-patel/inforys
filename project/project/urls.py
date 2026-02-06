@@ -24,15 +24,22 @@ urlpatterns = [
     path('login/',views.login,name='login'),
     path('admindashboard',views.admindashboard,name='admindashboard'),
     path('logout',views.logout,name='logout'),
-    path('Department',views.Department,name='Department'),
+    # path('Department',views.Department,name='Department'),
     path('add_employee/',views.add_employee,name='add_employee'),
     path('add',views.add,name='add'),
     path('all_employee/',views.all_employee,name='all_employee'),
     path('add_department/',views.add_department,name='add_department'),
     path('add_d',views.add_d,name="add_d"),
     path('all_department',views.all_department,name='all_department'),
-    path('all_query/',views.all_query,name='all_query'),
-    path('reply/',views.reply,name='reply')
+    path('userpanel/',views.userpanel,name='userpanel'),
+    
+    # userpanel
+     path('userpanel/',views.userpanel,name='userpanel'),
+    path('submit_q/',views.submit_q,name='submit_q'),
+    path('show_q/',views.show_q,name='show_q'),
+    path('all_q/',views.all_q,name='all_q'),
+    path('pending/',views.pending,name='pending'),
     
     
+
 ]

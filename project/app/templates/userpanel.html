@@ -1,0 +1,443 @@
+{% extends "base.html" %}
+
+{% block title %}userpanel
+{% endblock title %}
+
+{% block css %}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+     :root {
+        --sidebar-bg: #0f172a;
+        --action-panel-bg: rgba(255, 255, 255, 0.9);
+        
+        --main-bg: #0f172a; 
+        --content-bg: #f8fafc;
+        --accent: #6366f1;
+        --accent-hover: #4f46e5;
+        --text-dark: #0f172a;
+        --text-muted: #64748b;
+        --danger: #ef4444;
+        --success: #10b981;
+        --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    body {
+        /* Dashboard Background: Deep Gradient Look */
+        background: radial-gradient(circle at top right, #1e293b, #0f172a);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        margin: 0;
+        color: var(--text-dark);
+        height: 100vh;
+    }
+.dashboard-container{
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* LEFT ICON SIDEBAR */
+.nav-sidebar{
+    width:72px;
+    background:var(--sidebar-bg);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:22px 0;
+    gap:18px;
+    border-right:1px solid rgba(255,255,255,0.08);
+}
+
+.nav-icon{
+    color:#64748b;
+    text-decoration:none;
+    padding:12px;
+    border-radius:12px;
+    transition:var(--transition);
+}
+
+.nav-icon:hover{
+    color:#ffffff;
+    background:rgba(255,255,255,0.12);
+    transform:scale(1.08);
+}
+
+/* ACTION PANEL */
+.action-panel{
+    width:260px;
+    background:var(--action-panel-bg);
+    backdrop-filter:blur(10px);
+    padding:30px 18px;
+    display:flex;
+    flex-direction:column;
+    border-right:1px solid #e5e7eb;
+}
+
+/* TITLE */
+.panel-title{
+    font-size:11px;
+    font-weight:800;
+    color:#94a3b8;
+    text-transform:uppercase;
+    letter-spacing:1.4px;
+    margin-bottom:18px;
+}
+
+/* ACTION LINKS */
+.action-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 14px;
+    margin-bottom:8px;
+    border-radius:12px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    color:#475569;
+    transition:var(--transition);
+}
+
+.action-item span{
+    font-size:22px;
+    color:#64748b;
+    transition:var(--transition);
+}
+
+.action-item:hover{
+    background:#f1f5f9;
+    color:var(--accent);
+    transform:translateX(6px);
+}
+
+.action-item:hover span{
+    color:var(--accent);
+}
+
+/* ACTIVE STATE (important for dashboard) */
+.action-item.active{
+    background:#e0f2fe;
+    color:var(--accent);
+}
+
+.action-item.active span{
+    color:var(--accent);
+}
+
+/* LOGOUT / DANGER */
+.action-item.danger{
+    color:#dc2626;
+}
+
+.action-item.danger span{
+    color:#dc2626;
+}
+
+.action-item.danger:hover{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+
+
+
+.form-card {
+    background: #ffffff;
+    width:800px;
+    padding: 28px 32px;
+    border-radius: 8px;
+    max-width: 520px;
+    border: 1px solid #e0e0e0;
+}
+
+.form-card h2 {
+    margin-bottom: 22px;
+    font-size: 22px;
+    font-weight: 700;
+    text-align:center;
+    color: #000000;
+}
+
+/* FORM GROUP */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 6px;
+}
+
+/* INPUT FIELDS */
+.form-group input {
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    background: #ffffff;
+    color: #000000;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #000000;
+    box-shadow: 0 0 0 1px #000000;
+}
+
+/* SUBMIT BUTTON */
+.btn-submit {
+    margin-top: 10px;
+    padding: 10px 237px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    
+}
+
+.btn-submit:hover {
+    background-color: #222222;
+}
+
+/* ================= MAIN CONTENT ================= */
+.main-content{
+    flex: 1;
+    display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
+    padding: 40px;
+}
+
+
+/* QUERY TABLE CARD */
+.form-cardd{
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+/* HEADING */
+.form-cardd h2{
+    color: #000;
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 600;
+    border-left: 4px solid #000;
+    padding-left: 10px;
+}
+
+/* TABLE */
+.tble{
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* TABLE HEAD */
+.tble thead{
+    background: #f3f4f6;
+}
+
+.tble th{
+    color: #000;
+    text-align: left;
+    padding: 14px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000;
+}
+
+/* TABLE BODY */
+.tble td{
+    color: #000;
+    padding: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #d1d5db;
+}
+
+/* ROW HOVER */
+.tble tbody tr:hover{
+    background: #f9fafb;
+    transition: 0.2s ease;
+}
+
+/* S.NO CENTER */
+.tble td:first-child,
+.tble th:first-child{
+    text-align: center;
+    width: 70px;
+}
+
+/* QUERY COLUMN */
+.tble td:last-child{
+    max-width: 320px;
+    line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .tble{
+        font-size: 13px;
+    }
+}
+
+
+
+{% endblock css %}
+
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="nav-sidebar">
+        <a href="?" class="nav-icon">
+            <span class="material-icons-outlined" style="color: var(--accent); font-size: 32px;">
+                grid_view
+            </span>
+        </a>
+        <a href="#" class="nav-icon">
+            <span class="material-icons-outlined">analytics</span>
+        </a>
+        <a href="#" class="nav-icon">
+            <span class="material-icons-outlined">settings</span>
+        </a>
+    </div>
+
+    <!-- ACTION PANEL -->
+    <div class="action-panel">
+        <h4 class="panel-title">Management</h4>
+
+        <a href="#" class="action-item">
+            <span class="material-icons-outlined">person</span>
+            My Profile
+        </a>
+
+        <a href="{% url 'submit_q' %}" class="action-item">
+            <span class="material-icons-outlined">help_outline</span>
+            Submit Query
+        </a>
+
+        <a href="{% url 'show_q' %}" class="action-item">
+            <span class="material-icons-outlined">visibility</span>
+            Show Query
+        </a>
+
+        <a href="#" class="action-item">
+            <span class="material-icons-outlined">hourglass_empty</span>
+            Pending Query
+        </a>
+
+        <a href="#" class="action-item">
+            <span class="material-icons-outlined">task_alt</span>
+            Done Query
+        </a>
+
+        <a href="#" class="action-item">
+            <span class="material-icons-outlined">settings</span>
+            Setting
+        </a>
+
+        <a href="{% url 'logout' %}" class="action-item" style="color: var(--danger);">
+            <span class="material-icons-outlined">logout</span>
+            Logout
+        </a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        {% if submit_q %}
+        <!-- SUBMIT QUERY FORM -->
+        <div class="form-card">
+            <h2>Query</h2>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" name="department" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Query</label>
+                    <input type="text" name="query" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
+        </div>
+
+        {% elif show_q %}
+        <!-- SHOW QUERY TABLE -->
+        <div class="form-cardd" style="max-width:100%;">
+            <h2>Show Query</h2>
+
+            <table class="tble">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Query</th>
+                        <!-- <th><a>EDIT</a></th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in show_q %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.department }}</td>
+                        <td>{{ i.query }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align:center;">No Query Found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% endif %}
+
+    </main>
+
+</div>
+
+{% endblock content %}
