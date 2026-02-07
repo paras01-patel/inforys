@@ -39,6 +39,12 @@ urlpatterns = [
     path('show_q/',views.show_q,name='show_q'),
     path('all_q/',views.all_q,name='all_q'),
     path('pending/',views.pending,name='pending'),
+    path('pending_q/',views.pending_q,name='pending_q'),
+    path('edit/<int:pk>',views.edit,name='edit'),
+    path('delete/<int:pk>',views.delete,name='delete')
+    
+    
+    
     
     
 

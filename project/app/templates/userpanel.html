@@ -344,7 +344,7 @@
             Show Query
         </a>
 
-        <a href="#" class="action-item">
+        <a href="{% url 'pending_q' %}" class="action-item">
             <span class="material-icons-outlined">hourglass_empty</span>
             Pending Query
         </a>
@@ -373,7 +373,7 @@
         <div class="form-card">
             <h2>Query</h2>
 
-            <form action="" method="POST">
+            <form method="POST">
                 {% csrf_token %}
 
                 <div class="form-group">
@@ -400,7 +400,7 @@
             </form>
         </div>
 
-        {% elif show_q %}
+        {% elif data1 %}
         <!-- SHOW QUERY TABLE -->
         <div class="form-cardd" style="max-width:100%;">
             <h2>Show Query</h2>
@@ -413,31 +413,68 @@
                         <th>Email</th>
                         <th>Department</th>
                         <th>Query</th>
-                        <!-- <th><a>EDIT</a></th> -->
+                        <th>Status</th>
+                        <th>EDIT / DELETE</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    {% for i in show_q %}
+                    {% for i in data1 %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ i.name }}</td>
                         <td>{{ i.email }}</td>
                         <td>{{ i.department }}</td>
                         <td>{{ i.query }}</td>
+                        <td>{{ i.status }}</td>
+                        <td>
+                            <a href="{% url 'edit' pk=i.id %}">edit</a> /
+                            <a href="{% url 'delete' pk=i.id %}">delete</a>
+                        </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="5" style="text-align:center;">No Query Found</td>
+                        <td colspan="7" style="text-align:center;">No Query Found</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
 
+        {% elif pending_q %}
+        <!-- PENDING QUERY FORM -->
+        <div class="form-card">
+            <h2>Pending Query</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" value={{ data1.name }}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" value="{{ data1.email }}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>Department</label>
+                    <input type="text" value="{{ data1.department }}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>Query</label>
+                    <input type="text" value="{{ data1.query }}" readonly>
+                </div>
+                <button type="submit" class="btn-submit">Submit</button>
+                
+            </form>
+        </div>
+
         {% endif %}
 
     </main>
-
 </div>
-
 {% endblock content %}

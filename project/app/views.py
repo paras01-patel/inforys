@@ -116,7 +116,7 @@ def submit_q(req):
     
 def show_q(req):
     data1=querys.objects.all()
-    return render(req,'userpanel.html',{'show_q':data1})
+    return render(req,'userpanel.html',{'show_q':True,'data1':data1})
     
 
 
@@ -130,3 +130,17 @@ def pending(req):
     return render(req,'userpanel.html',{'pending':True})
 
 
+def pending_q(req):
+    return render(req,"userpanel.html",{'pending_q':True})
+
+    
+
+def edit(req,pk):
+    data=querys.objects.filter(id=pk)
+    return render(req,"userpanel.html",{'pending_q':True,'data':data})
+
+
+def delete(req,pk):
+    data=querys.objects.filter(id=pk)
+    data.delete()
+    return render(req,'userpanel.html',{'show_q':True ,'data':data})
