@@ -441,7 +441,7 @@
             </table>
         </div>
 
-        {% elif pending_q %}
+        {% elif edit %}
         <!-- PENDING QUERY FORM -->
         <div class="form-card">
             <h2>Pending Query</h2>
@@ -451,22 +451,22 @@
 
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" value={{ data1.name }}" readonly>
+                    <input type="text" value="{{ data.name }}" readonly>
                 </div>
 
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" value="{{ data1.email }}" readonly>
+                    <input type="email" value="{{ data.email }}" readonly>
                 </div>
 
                 <div class="form-group">
                     <label>Department</label>
-                    <input type="text" value="{{ data1.department }}" readonly>
+                    <input type="text" value="{{ data.department }}" readonly>
                 </div>
 
                 <div class="form-group">
                     <label>Query</label>
-                    <input type="text" value="{{ data1.query }}" readonly>
+                    <input type="text" value="{{ data.query }}" >
                 </div>
                 <button type="submit" class="btn-submit">Submit</button>
                 

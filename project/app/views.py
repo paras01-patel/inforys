@@ -9,14 +9,11 @@ from app.models import add_dept,querys
 def landing(req):
     return render(req,'landing.html')
  
-
 def login(req):
     if req.method == 'POST':
         e = req.POST.get('email')
         p = req.POST.get('password')
         if e == 'admin@gmail.com' and p == 'admin':
-            req.session['admin_e'] = e
-            req.session['admin_p'] = p
             req.session['admin_n'] = 'admin'
             return redirect('admindashboard')
         else :
@@ -24,13 +21,10 @@ def login(req):
             if user:
                 udata=employee.objects.get(email=e)
                 if udata.email==e and udata.lname==p:
-                    return redirect('userpanel')
-                
-             
+                    return redirect('userpanel')        
     else:
         x={ 'g':"wrong passord or username"}
         return render(req,'login.html',{'data':x})
-
     return render(req, 'login.html')
 
 def admindashboard(req):
@@ -131,13 +125,15 @@ def pending(req):
 
 
 def pending_q(req):
-    return render(req,"userpanel.html",{'pending_q':True})
+    data=querys.objects.all()
+    return render(req,"userpanel.html",{'pending_q':True,'data':data})
 
     
 
 def edit(req,pk):
     data=querys.objects.filter(id=pk)
-    return render(req,"userpanel.html",{'pending_q':True,'data':data})
+    dq=querys.objects.get(id=pk)
+    return render(req,"userpanel.html",{'edit':True,'data':dq})
 
 
 def delete(req,pk):
