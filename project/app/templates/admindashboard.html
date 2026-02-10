@@ -334,8 +334,7 @@ h1 {
             <h2>Register New Employee</h2>
 
             <form action="{% url 'add' %}" method="POST">
-                {% csrf_token %}
-
+                {% csrf_token %}    q
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
                     <div class="form-group">
                         <label>First Name</label>
@@ -442,6 +441,49 @@ h1 {
                 <button type="submit" class="btn-submit">Add Department</button>
             </form>
         </div>
+{% elif adreply %}
+
+<div class="form-card">
+            <h2>Reply query New </h2>
+
+            <form action={% url "reply" pk=data.id %} method="POST">
+                {% csrf_token %}    
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+                    <div class="form-group">
+                        <label> Name</label>
+                        <input type="text" value="{{data.name}}" readonly name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>email</label>
+                        <input type="email"  value="{{data.email}}" readonly name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>query</label>
+                        <input type="text" name="query" value="{{data.query}}" readonly required>
+                    </div>
+                       <div class="form-group">
+                        <label>department</label>
+                        <input type="text" name="department" value="{{data.department}}" readonly required>
+                    </div>
+
+                       <div class="form-group">
+                        <label>staus</label>
+                        <input type="text" name="status" value="{{data.status}}" readonly required>
+                    </div>
+                       <div class="form-group">
+                        <label>adminreply</label>
+                        <input type="text" name="admin_reply" value="{{data.admin_reply}}" required>
+                    </div>
+
+
+                    
+                </div>
+
+                <button type="submit" class="btn-submit">Save Employee</button>
+            </form>
+        </div>
 
 
         {% elif all_q %}
@@ -455,9 +497,10 @@ h1 {
                         <th>S.No</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Department</th>
                         <th>Query</th>
-                        <th> <a href = "{% url 'pending' %}">Pending</a></th>
+                        <th>Department</th>
+                        <th>status</th>
+                        <th> adminreply</th>
                         
                     </tr>
                 </thead>
@@ -467,8 +510,12 @@ h1 {
                         <td>{{ forloop.counter }}</td>
                         <td>{{ i.name }}</td>
                         <td>{{ i.email }}</td>
+                        <td>{{ i.query }}</td>
                         <td>{{ i.department }}</td>
-                        <td>{{ i.Query }}</td>
+                        <td>{{ i.status }}</td>
+                        <th> <a href = "{% url 'adreply' pk=i.id %}">adminreply</a></th>
+
+
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -478,6 +525,14 @@ h1 {
 
         {% endif %}
     </main>
+
+
+
+
+
+
+
+    
 
 </div>
 {% endblock content %}

@@ -15,7 +15,7 @@ def login(req):
         p = req.POST.get('password')
         if e == 'admin@gmail.com' and p == 'admin':
             req.session['admin_n'] = 'admin'
-            return redirect('admindashboard')
+            return render(req,'admindashboard.html')
         else :
             user=employee.objects.filter(email=e) 
             if user:
@@ -133,10 +133,34 @@ def pending_q(req):
 def edit(req,pk):
     data=querys.objects.filter(id=pk)
     dq=querys.objects.get(id=pk)
+    
     return render(req,"userpanel.html",{'edit':True,'data':dq})
 
 
 def delete(req,pk):
-    data=querys.objects.filter(id=pk)
-    data.delete()
-    return render(req,'userpanel.html',{'show_q':True ,'data':data})
+    data1=querys.objects.get(id=pk)
+    data1.delete()
+    data1=querys.objects.filter(id=pk)
+    return render(req,'userpanel.html',{'show_q':True,'data1':data1})
+
+
+def e(req):
+    if req.method=='POST':
+        q=req.method.get()
+        
+        
+        
+def adreply(req,pk):
+    data=querys.objects.get(id=pk)
+    return render(req,'admindashboard.html',{'adreply':True,'data':data})
+
+def reply(req,pk):
+    data=querys.objects.get(id=pk)
+    admin=req.POST.get('admin_reply')
+    data.admin_reply=admin
+    data.status='done'
+    data.save()
+    data=querys.objects.get(id=pk)
+    return render(req,'admindashboard.html',{'show_q':True,'data':data})
+    
+    

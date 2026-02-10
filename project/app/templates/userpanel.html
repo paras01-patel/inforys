@@ -400,7 +400,7 @@
             </form>
         </div>
 
-        {% elif data1 %}
+        {% elif show_q %}
         <!-- SHOW QUERY TABLE -->
         <div class="form-cardd" style="max-width:100%;">
             <h2>Show Query</h2>
@@ -446,7 +446,7 @@
         <div class="form-card">
             <h2>Pending Query</h2>
 
-            <form method="POST">
+            <form method="POST" action="e">
                 {% csrf_token %}
 
                 <div class="form-group">
@@ -466,7 +466,7 @@
 
                 <div class="form-group">
                     <label>Query</label>
-                    <input type="text" value="{{ data.query }}" >
+                    <input type="text" name="q" value="{{ data.query }}" >
                 </div>
                 <button type="submit" class="btn-submit">Submit</button>
                 
