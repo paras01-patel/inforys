@@ -17,7 +17,9 @@ def login(req):
             req.session['admin_n'] = 'admin'
             return render(req,'admindashboard.html')
         else :
-            user=employee.objects.filter(email=e) 
+            user=employee.objects.filter(email=e)
+            user1=employee.objects.get(email=e)
+            req.session['userid']=user1.id
             if user:
                 udata=employee.objects.get(email=e)
                 if udata.email==e and udata.lname==p:
@@ -121,15 +123,19 @@ def all_q(req):
 
 
 def pending(req):
-    return render(req,'userpanel.html',{'pending':True})
-
+    pass
 
 def pending_q(req):
-    data=querys.objects.all()
+    data=querys.objects.filter(status='pending')
     return render(req,"userpanel.html",{'pending_q':True,'data':data})
 
     
 
+def done_q(req):
+    data=querys.objects.filter(status='done')
+    return render(req,"userpanel.html",{'pending_q':True,'data':data})
+
+    
 def edit(req,pk):
     data=querys.objects.filter(id=pk)
     dq=querys.objects.get(id=pk)

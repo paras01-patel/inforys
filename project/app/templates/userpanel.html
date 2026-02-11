@@ -349,7 +349,7 @@
             Pending Query
         </a>
 
-        <a href="#" class="action-item">
+        <a href="{% url 'done_q' %}" class="action-item">
             <span class="material-icons-outlined">task_alt</span>
             Done Query
         </a>
@@ -441,6 +441,47 @@
             </table>
         </div>
 
+         {% elif done_q %}
+        <!-- SHOW QUERY TABLE -->
+        <div class="form-cardd" style="max-width:100%;">
+            <h2>Show Query</h2>
+
+            <table class="tble">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Query</th>
+                        <th>Status</th>
+                        <th>EDIT / DELETE</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.department }}</td>
+                        <td>{{ i.query }}</td>
+                        <td>{{ i.status }}</td>
+                        <td>
+                            <a href="{% url 'edit' pk=i.id %}">edit</a> /
+                            <a href="{% url 'delete' pk=i.id %}">delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" style="text-align:center;">No Query Found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
         {% elif edit %}
         <!-- PENDING QUERY FORM -->
         <div class="form-card">
@@ -472,8 +513,42 @@
                 
             </form>
         </div>
+        {% elif pending_q %}
 
-        {% endif %}
+         <div class="form-cardd" style="max-width:100%;">
+            <h2>Show Query</h2>
+
+            <table class="tble">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Query</th>
+                      
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.department }}</td>
+                        <td>{{ i.query }}</td>
+                        <td>{{ i.status }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" style="text-align:center;">No Query Found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+ {% endif %}
 
     </main>
 </div>

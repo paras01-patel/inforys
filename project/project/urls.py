@@ -38,8 +38,10 @@ urlpatterns = [
     path('submit_q/',views.submit_q,name='submit_q'),
     path('show_q/',views.show_q,name='show_q'),
     path('all_q/',views.all_q,name='all_q'),
-    path('pending/',views.pending,name='pending'),
+    # path('pending/',views.pending,name='pending'),
     path('pending_q/',views.pending_q,name='pending_q'),
+    path('done_q/',views.done_q,name='done_q'),
+    
     path('edit/<int:pk>',views.edit,name='edit'),
     path('delete/<int:pk>',views.delete,name='delete'),
     path('e',views.e,name='e'),
