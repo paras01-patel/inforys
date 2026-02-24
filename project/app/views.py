@@ -8,7 +8,18 @@ from app.models import add_dept,querys
 
 def landing(req):
     return render(req,'landing.html')
- 
+
+def navigate(req):
+    return render(req,'navigate.html')
+
+
+def knowledge(req):
+    return render(req,'knowledge.html')
+
+
+def investor(req):
+    return render(req,'investor.html')
+
 def login(req):
     if req.method == 'POST':
         e = req.POST.get('email')
@@ -53,11 +64,11 @@ def logout(req):
     
     
     
-      
+    
 def add_employee(req):
     
     return render(req,'admindashboard.html',{'add_employee':True})
-
+from django.core.mail import send_mail 
 def add(req):
     if req.method=="POST":
         fname=req.POST.get('fname')
@@ -70,6 +81,13 @@ def add(req):
             return render(req,'admindashboard.html',{'add_employee':True})
         else:
             employee.objects.create(fname=fname,lname=lname,email=email,dept=Department)
+            send_mail(
+            subject="mailing services",
+            message=f'hello',
+            from_email="paraschandrawanshi649@gmail.com",  
+            recipient_list=[email],
+            fail_silently=False,
+            )
             return render(req,'admindashboard.html',{'add_employee':True})
         
 def all_employee(req):

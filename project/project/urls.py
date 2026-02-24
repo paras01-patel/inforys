@@ -21,6 +21,9 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.landing,name='landing'),
+    path('navigate/',views.navigate,name='navigate'),
+    path('knowledge/',views.knowledge,name='knowledge'),
+    path('investor/',views.investor,name='investor'),
     path('login/',views.login,name='login'),
     path('admindashboard',views.admindashboard,name='admindashboard'),
     path('logout',views.logout,name='logout'),
@@ -43,7 +46,7 @@ urlpatterns = [
     path('done_q/',views.done_q,name='done_q'),
     
     path('edit/<int:pk>',views.edit,name='edit'),
-    path('delete/<int:pk>',views.delete,name='delete'),
+    path('delete/<int:pk>',views.delete,name='delete'), 
     path('e',views.e,name='e'),
     path('adreply/<int:pk>',views.adreply,name='adreply'),
     path('reply/<int:pk>',views.reply,name='reply'),

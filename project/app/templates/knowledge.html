@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Infosys Knowledge Institute{% endblock %}
+
+{% block css %}
+<style>
+
+.iki-hero{
+    height:70vh;
+    background-image:url('{% static "img/knowledge.jpg" %}');
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding-left:8%;
+}
+
+.iki-hero::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.65);
+    top:0;
+    left:0;
+}
+
+.iki-content{
+    position:relative;
+    color:white;
+    max-width:750px;
+}
+
+.iki-content h1{
+    font-size:50px;
+    font-weight:700;
+}
+
+.iki-content p{
+    margin-top:20px;
+    font-size:18px;
+}
+
+.section{
+    padding:90px 8%;
+}
+
+.section h2{
+    text-align:center;
+    font-size:36px;
+    margin-bottom:60px;
+}
+
+/* Featured Report */
+.featured{
+    display:flex;
+    gap:50px;
+    align-items:center;
+    margin-bottom:80px;
+}
+
+.featured img{
+    width:45%;
+    border-radius:10px;
+}
+
+.featured-text{
+    width:55%;
+}
+
+.featured-text h3{
+    font-size:28px;
+    margin-bottom:20px;
+    color:#0d1b2a;
+}
+
+.featured-text p{
+    line-height:1.7;
+    font-size:15px;
+}
+
+.featured-text button{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    background:#0d1b2a;
+    color:white;
+    cursor:pointer;
+}
+
+/* Research Grid */
+.grid{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:30%;
+    background:#f4f6f9;
+    padding:30px;
+    border-radius:8px;
+    margin-bottom:30px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.1);
+}
+
+.card h4{
+    margin-bottom:15px;
+    color:#0d1b2a;
+}
+
+.card p{
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* Newsletter */
+.newsletter{
+    background:#0d1b2a;
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
+
+.newsletter h2{
+    font-size:32px;
+}
+
+.newsletter input{
+    margin-top:25px;
+    padding:12px 20px;
+    width:280px;
+    border:none;
+    outline:none;
+}
+
+.newsletter button{
+    padding:12px 25px;
+    border:none;
+    background:#4e73df;
+    color:white;
+    cursor:pointer;
+}
+
+.newsletter button:hover{
+    background:#2e59d9;
+}
+
+@media(max-width:768px){
+    .featured{
+        flex-direction:column;
+    }
+    .featured img,
+    .featured-text{
+        width:100%;
+    }
+    .grid{
+        flex-direction:column;
+    }
+    .card{
+        width:100%;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<div class="iki-hero">
+    <div class="iki-content">
+        <h1>Infosys Knowledge Institute</h1>
+        <p>Research-driven insights to help enterprises transform, innovate and lead in the digital economy.</p>
+    </div>
+</div>
+
+<div class="section">
+
+    <!-- Featured Insight -->
+    <div class="featured">
+        <img src="{% static 'img/report.jpg' %}" alt="Report">
+        <div class="featured-text">
+            <h3>The AI-First Enterprise</h3>
+            <p>
+                Discover how AI adoption is redefining business models, improving operational efficiency 
+                and accelerating digital transformation across industries.
+            </p>
+            <button>Read Full Report</button>
+        </div>
+    </div>
+
+    <!-- Research Grid -->
+    <h2>Research Categories</h2>
+
+    <div class="grid">
+        <div class="card">
+            <h4>Digital Transformation</h4>
+            <p>Strategies and frameworks for enterprise modernization.</p>
+        </div>
+
+        <div class="card">
+            <h4>Cloud & Infrastructure</h4>
+            <p>Insights into scalable cloud-native ecosystems.</p>
+        </div>
+
+        <div class="card">
+            <h4>AI & Automation</h4>
+            <p>Research on intelligent systems and automation trends.</p>
+        </div>
+
+        <div class="card">
+            <h4>Cybersecurity</h4>
+            <p>Enterprise security frameworks in a digital-first world.</p>
+        </div>
+
+        <div class="card">
+            <h4>Experience & Design</h4>
+            <p>Human-centered innovation and digital experiences.</p>
+        </div>
+
+        <div class="card">
+            <h4>Sustainability</h4>
+            <p>Technology-led sustainable growth initiatives.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+    <h2>Stay Updated with Our Insights</h2>
+    <p>Subscribe to receive our latest research and industry perspectives.</p>
+    <input type="email" placeholder="Enter your email">
+    <button>Subscribe</button>
+</div>
+
+{% endblock %}

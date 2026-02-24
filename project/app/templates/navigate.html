@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Navigate Your Next{% endblock %}
+
+{% block css %}
+<style>
+
+.navigate-hero{
+    height:80vh;
+    background-image:url('{% static "img/navigate.jpg" %}');
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding-left:80px;
+}
+
+.navigate-hero::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    top:0;
+    left:0;
+}
+
+.navigate-content{
+    position:relative;
+    color:white;
+    max-width:700px;
+}
+
+.navigate-content h1{
+    font-size:55px;
+    font-weight:700;
+    line-height:1.2;
+}
+
+.navigate-content p{
+    margin-top:20px;
+    font-size:18px;
+    letter-spacing:1px;
+}
+
+.section{
+    padding:90px 10%;
+}
+
+.section h2{
+    font-size:38px;
+    margin-bottom:50px;
+    text-align:center;
+}
+
+.cards{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:30%;
+    background:#f5f7fa;
+    padding:40px;
+    border-radius:10px;
+    transition:0.3s;
+    margin-bottom:30px;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#0d1b2a;
+}
+
+.card p{
+    font-size:15px;
+    line-height:1.6;
+}
+
+.cta-section{
+    background:#0d1b2a;
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
+
+.cta-section h2{
+    font-size:36px;
+}
+
+.cta-btn{
+    margin-top:30px;
+    padding:14px 40px;
+    background:white;
+    border:none;
+    color:#0d1b2a;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.cta-btn:hover{
+    background:#4e73df;
+    color:white;
+}
+
+@media(max-width:768px){
+    .cards{
+        flex-direction:column;
+    }
+    .card{
+        width:100%;
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<div class="navigate-hero">
+    <div class="navigate-content">
+        <h1>Navigate Your Next</h1>
+        <p>Helping enterprises reinvent themselves in the digital era through innovation, cloud and AI transformation.</p>
+    </div>
+</div>
+
+<!-- Strategy Section -->
+<div class="section">
+    <h2>Our Strategic Focus</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Digital Transformation</h3>
+            <p>We modernize legacy systems and build future-ready platforms to enable agility and scalability.</p>
+        </div>
+
+        <div class="card">
+            <h3>Cloud & AI</h3>
+            <p>Leveraging advanced analytics, artificial intelligence and cloud computing for smarter decisions.</p>
+        </div>
+
+        <div class="card">
+            <h3>Experience Design</h3>
+            <p>Delivering seamless customer experiences through human-centered digital innovation.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="cta-section">
+    <h2>Ready to Transform Your Business?</h2>
+    <button class="cta-btn">Explore Solutions</button>
+</div>
+
+{% endblock %}

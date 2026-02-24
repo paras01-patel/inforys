@@ -293,7 +293,7 @@ h1 {
     </div>
 
     <!-- ACTION PANEL -->
-    <div class="action-panel">
+    <div class="action-panel"
         <h4 class="panel-title">Management</h4>
 
         <a href="{% url 'add_employee' %}" class="action-item">
@@ -335,7 +335,7 @@ h1 {
             <h2>Register New Employee</h2>
 
             <form action="{% url 'add' %}" method="POST">
-                {% csrf_token %}    q
+                {% csrf_token %}    
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
                     <div class="form-group">
                         <label>First Name</label>
@@ -447,7 +447,7 @@ h1 {
 <div class="form-card">
             <h2>Reply query New </h2>
 
-            <form action={% url "reply" pk=data.id %} method="POST">
+            <form action={% url 'reply' pk=data.id %} method="POST">
                 {% csrf_token %}    
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
                     <div class="form-group">

@@ -157,14 +157,14 @@
     <div class="logo">Infosys</div>
 
     <div class="menu">
-        <a href="#">Navigate your next</a>
-        <a href="#">Infosys Knowledge Institute</a>
-        <a href="#">Investors</a>
-        {% if user.email %}
-        <a href="{% url "login" %}"> login</a>
+        <a href="{% url "navigate" %}">Navigate your next</a>
+        <a href="{% url "knowledge" %}">Infosys Knowledge Institute</a>
+        <a href="{% url "investor" %}">Investors</a>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
         {% else %}
-        <a href="{% url "logout" %}"> logout</a>
-        {% endif%}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
     </div>
 
     <div class="icons">
