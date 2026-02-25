@@ -112,6 +112,13 @@ def all_department(req):
     uuser=add_dept.objects.all()
     return render(req,'admindashboard.html',{'all_department':uuser})
 
+
+
+def remove_emp(req):
+    user =employee.objects.filter(id=pk)
+    user.delete()
+    return redirect('admindashboard.html',{'remove_emp':True})
+
 # usrpanel
 
 def userpanel(req):

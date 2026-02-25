@@ -34,10 +34,12 @@ urlpatterns = [
     path('add_department/',views.add_department,name='add_department'),
     path('add_d',views.add_d,name="add_d"),
     path('all_department',views.all_department,name='all_department'),
-    path('userpanel/',views.userpanel,name='userpanel'),
+    path('remove_emp',views.remove_emp,name='remove_emp'),
+    
     
     # userpanel
-     path('userpanel/',views.userpanel,name='userpanel'),
+    path('userpanel/',views.userpanel,name='userpanel'),
+    path('userpanel/',views.userpanel,name='userpanel'),
     path('submit_q/',views.submit_q,name='submit_q'),
     path('show_q/',views.show_q,name='show_q'),
     path('all_q/',views.all_q,name='all_q'),
