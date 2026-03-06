@@ -54,6 +54,7 @@
 }
 
 /* Featured Report */
+
 .featured{
     display:flex;
     gap:50px;
@@ -90,11 +91,13 @@
     cursor:pointer;
 }
 
-/* Research Grid */
+/* Grid */
+
 .grid{
     display:flex;
     justify-content:space-between;
     flex-wrap:wrap;
+    gap:30px;
 }
 
 .card{
@@ -102,7 +105,6 @@
     background:#f4f6f9;
     padding:30px;
     border-radius:8px;
-    margin-bottom:30px;
     transition:0.3s;
 }
 
@@ -122,6 +124,7 @@
 }
 
 /* Newsletter */
+
 .newsletter{
     background:#0d1b2a;
     color:white;
@@ -153,93 +156,195 @@
     background:#2e59d9;
 }
 
+/* Responsive */
+
 @media(max-width:768px){
-    .featured{
-        flex-direction:column;
-    }
-    .featured img,
-    .featured-text{
-        width:100%;
-    }
-    .grid{
-        flex-direction:column;
-    }
-    .card{
-        width:100%;
-    }
+
+.featured{
+flex-direction:column;
+}
+
+.featured img,
+.featured-text{
+width:100%;
+}
+
+.grid{
+flex-direction:column;
+}
+
+.card{
+width:100%;
+}
+
 }
 
 </style>
 {% endblock %}
 
+
 {% block content %}
 
 <!-- Hero -->
 <div class="iki-hero">
-    <div class="iki-content">
-        <h1>Infosys Knowledge Institute</h1>
-        <p>Research-driven insights to help enterprises transform, innovate and lead in the digital economy.</p>
-    </div>
+<div class="iki-content">
+<h1>Infosys Knowledge Institute</h1>
+<p>Research-driven insights to help enterprises transform, innovate and lead in the digital economy.</p>
+</div>
 </div>
 
 <div class="section">
 
-    <!-- Featured Insight -->
-    <div class="featured">
-        <img src="{% static 'img/report.jpg' %}" alt="Report">
-        <div class="featured-text">
-            <h3>The AI-First Enterprise</h3>
-            <p>
-                Discover how AI adoption is redefining business models, improving operational efficiency 
-                and accelerating digital transformation across industries.
-            </p>
-            <button>Read Full Report</button>
-        </div>
-    </div>
+<!-- Featured Insight -->
+<div class="featured">
+<img src="{% static 'img/report.jpg' %}">
+<div class="featured-text">
+<h3>The AI-First Enterprise</h3>
+<p>
+Discover how AI adoption is redefining business models,
+improving operational efficiency and accelerating digital transformation.
+</p>
+<button>Read Full Report</button>
+</div>
+</div>
 
-    <!-- Research Grid -->
-    <h2>Research Categories</h2>
+<!-- Research Categories -->
 
-    <div class="grid">
-        <div class="card">
-            <h4>Digital Transformation</h4>
-            <p>Strategies and frameworks for enterprise modernization.</p>
-        </div>
+<h2>Research Categories</h2>
 
-        <div class="card">
-            <h4>Cloud & Infrastructure</h4>
-            <p>Insights into scalable cloud-native ecosystems.</p>
-        </div>
+<div class="grid">
 
-        <div class="card">
-            <h4>AI & Automation</h4>
-            <p>Research on intelligent systems and automation trends.</p>
-        </div>
+<div class="card">
+<h4>Digital Transformation</h4>
+<p>Strategies and frameworks for enterprise modernization.</p>
+</div>
 
-        <div class="card">
-            <h4>Cybersecurity</h4>
-            <p>Enterprise security frameworks in a digital-first world.</p>
-        </div>
+<div class="card">
+<h4>Cloud & Infrastructure</h4>
+<p>Insights into scalable cloud-native ecosystems.</p>
+</div>
 
-        <div class="card">
-            <h4>Experience & Design</h4>
-            <p>Human-centered innovation and digital experiences.</p>
-        </div>
+<div class="card">
+<h4>AI & Automation</h4>
+<p>Research on intelligent systems and automation trends.</p>
+</div>
 
-        <div class="card">
-            <h4>Sustainability</h4>
-            <p>Technology-led sustainable growth initiatives.</p>
-        </div>
-    </div>
+<div class="card">
+<h4>Cybersecurity</h4>
+<p>Enterprise security frameworks in a digital-first world.</p>
+</div>
+
+<div class="card">
+<h4>Experience & Design</h4>
+<p>Human-centered innovation and digital experiences.</p>
+</div>
+
+<div class="card">
+<h4>Sustainability</h4>
+<p>Technology-led sustainable growth initiatives.</p>
+</div>
 
 </div>
 
+</div>
+
+
+<!-- Latest Insights -->
+
+<div class="section">
+
+<h2>Latest Insights</h2>
+
+<div class="grid">
+
+<div class="card">
+<h4>Future of AI in Enterprises</h4>
+<p>AI is transforming enterprises by automating workflows and improving strategic decision making.</p>
+</div>
+
+<div class="card">
+<h4>Cloud Modernization</h4>
+<p>Organizations are moving towards cloud-native platforms to increase agility and scalability.</p>
+</div>
+
+<div class="card">
+<h4>Data Driven Strategy</h4>
+<p>Companies are leveraging big data and analytics to drive smarter business strategies.</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Case Studies -->
+
+<div class="section">
+
+<h2>Client Success Stories</h2>
+
+<div class="grid">
+
+<div class="card">
+<h4>Retail Transformation</h4>
+<p>Infosys helped a retail company optimize supply chains using AI forecasting tools.</p>
+</div>
+
+<div class="card">
+<h4>Banking Automation</h4>
+<p>A major bank improved efficiency using robotic process automation and AI systems.</p>
+</div>
+
+<div class="card">
+<h4>Healthcare Digitization</h4>
+<p>Cloud healthcare platforms improved patient record access and hospital management.</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Expert Perspectives -->
+
+<div class="section">
+
+<h2>Expert Perspectives</h2>
+
+<div class="grid">
+
+<div class="card">
+<h4>AI Governance</h4>
+<p>Responsible AI frameworks ensure fairness, transparency and accountability.</p>
+</div>
+
+<div class="card">
+<h4>Future of Work</h4>
+<p>Hybrid work culture is redefining productivity and employee collaboration.</p>
+</div>
+
+<div class="card">
+<h4>Digital Leadership</h4>
+<p>Leaders must adopt digital transformation strategies to stay competitive.</p>
+</div>
+
+</div>
+
+</div>
+
+
 <!-- Newsletter -->
+
 <div class="newsletter">
-    <h2>Stay Updated with Our Insights</h2>
-    <p>Subscribe to receive our latest research and industry perspectives.</p>
-    <input type="email" placeholder="Enter your email">
-    <button>Subscribe</button>
+
+<h2>Stay Updated with Our Insights</h2>
+
+<p>Subscribe to receive our latest research and industry perspectives.</p>
+
+<input type="email" placeholder="Enter your email">
+
+<button>Subscribe</button>
+
 </div>
 
 {% endblock %}
